@@ -14,6 +14,9 @@ jobs:
         node-version: [14.x]
     
     steps:
-      - uses: actions/checkout@v1
-      - run: npm install
-      - run: npm run build
+      - name: checkout code
+        uses: actions/checkout@v1
+      - name: install dependencies
+        run: npm ci
+      - name: build
+        run: npm run build
