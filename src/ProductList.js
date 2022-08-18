@@ -22,7 +22,7 @@ export default function ProductList() {
           <S.Details>
             <S.Title>{product.title}</S.Title>
             <PText>{product.category}</PText>
-            <PText>{product.rating.rate} out of 5</PText>
+            <PText>{product.rating.rate} out of 10</PText>
             <S.PriceRow>
               <Heading3>₹ {product.price}</Heading3>            
             </S.PriceRow>
