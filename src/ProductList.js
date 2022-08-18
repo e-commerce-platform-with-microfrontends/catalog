@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { ButtonAction, ButtonSize, Heading3, PText } from 'ui-components';
+import { Heading3, PText } from 'ui-components';
 import * as S from './ProductList.styles';
 
 export default function ProductList() {
@@ -12,16 +12,11 @@ export default function ProductList() {
     setProducts(productList);
   }, []);
 
-  const addToCart = (product) => {
-    const addToCartEvent = new CustomEvent('ADD_TO_CART', { detail: { productId: product.id } });
-    window.dispatchEvent(addToCartEvent);
-  }
-
   return (
     <S.ProductList>
       {products.map((product) => (
         <S.Card key={`${product.id}`}>
-          <S.Link to={`/products/${product.id}?category=${product.category}`}>
+          <S.Link to={`/products/${product.id}?category=${product.category}`} id={`go-to-product-details-${product.id}`}>
             <S.Image src={product.image} />
           </S.Link>
           <S.Details>
@@ -29,13 +24,7 @@ export default function ProductList() {
             <PText>{product.category}</PText>
             <PText>{product.rating.rate} out of 5</PText>
             <S.PriceRow>
-              <Heading3>₹ {product.price}</Heading3>
-              <S.AddToCart buttonType={ButtonAction.PRIMARY}
-                size={ButtonSize.SMALL}
-                disabled={false}
-                onClick={() => addToCart(product)}>
-                Add to Cart
-              </S.AddToCart>
+              <Heading3>₹ {product.price}</Heading3>            
             </S.PriceRow>
           </S.Details>
         </S.Card>

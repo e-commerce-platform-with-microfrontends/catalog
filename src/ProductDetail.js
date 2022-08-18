@@ -38,7 +38,9 @@ export default function ProductDetails() {
             <S.SpaceTop />
             <PText>{product.description}</PText>
           </div>
-          <Button buttonType={ButtonAction.PRIMARY}
+          <Button 
+            id="add-to-cart"
+            buttonType={ButtonAction.PRIMARY}
             size={ButtonSize.DEFAULT}
             onClick={addToCart}>
             Add to Cart
