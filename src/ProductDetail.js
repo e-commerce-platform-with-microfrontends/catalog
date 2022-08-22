@@ -11,12 +11,12 @@ export default function ProductDetails() {
   const [product, setProduct] = useState({});
 
   useEffect(async () => {
-    const product = await fetch(`https://fakestoreapi.com/products/${productId}`).then(res => res.json());
+    const product = await fetch(`http://localhost:4000/products/${productId}`).then(res => res.json());
     setProduct(product);
   }, []);
 
   const addToCart = (e) => {
-    const event = new CustomEvent('ADD_TO_CART', { detail: { productId: product.id } });
+    const event = new CustomEvent('ADD_TO_CART', { detail: { itemId: product.id, price: product.price } });
     window.dispatchEvent(event)
   }
 

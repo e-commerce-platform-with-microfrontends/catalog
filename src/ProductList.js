@@ -7,7 +7,7 @@ export default function ProductList() {
   const [products, setProducts] = useState([]);
 
   useEffect(async () => {
-    const productList = await fetch('https://fakestoreapi.com/products').then(res => res.json());
+    const productList = await fetch('http://localhost:4000/products').then(res => res.json());
 
     setProducts(productList);
   }, []);
