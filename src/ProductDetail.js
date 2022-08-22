@@ -22,12 +22,15 @@ export default function ProductDetails() {
 
   return (
     <>
+      <S.Link to={`/products`} id={`go-back`}>
+        <PText>← Back</PText>
+      </S.Link>
       <S.ProductDetails>
         <S.ImageContainer>
           <S.ProductImage src={product?.image} alt={product.title} className="product-image" />
         </S.ImageContainer>
         <S.ProductInfo>
-          <div>
+          <section>
             <Heading1>{product.title}</Heading1>
             <S.SpaceTop />
             <Heading2>₹ {product.price}</Heading2>
@@ -37,7 +40,7 @@ export default function ProductDetails() {
             </PText>
             <S.SpaceTop />
             <PText>{product.description}</PText>
-          </div>
+          </section>
           <Button 
             id="add-to-cart"
             buttonType={ButtonAction.PRIMARY}
