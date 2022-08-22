@@ -32,6 +32,7 @@ jobs:
 
   dev_delpoy:
     name: Dev Deploy
+    needs: build
     runs-on: macos-11
 
     strategy:
@@ -43,11 +44,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: distribution
+          path: dist
 
       - name: Deploy to Netlify Dev
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: "distribution"
+          publish-dir: "./dist"
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
