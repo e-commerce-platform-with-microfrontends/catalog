@@ -24,7 +24,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Upload Build
+      - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: distribution
@@ -34,13 +34,12 @@ jobs:
     name: Dev Deploy
     needs: build
     runs-on: macos-11
-
-    strategy:
-      matrix:
-        node-version: [14.x]
+    environment: 
+      name: dev
+      url: https://catalog-mfe-dev.netlify.app
 
     steps:
-      - name: Download the latest build
+      - name: Download Latest Artifact
         uses: actions/download-artifact@v3
         with:
           name: distribution
@@ -60,3 +59,63 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1
+
+  staging_delpoy:
+    name: Staging Deploy
+    needs: dev_delpoy
+    runs-on: macos-11
+    environment: 
+      name: staging
+      url: https://catalog-mfe-dev.netlify.app
+    
+    steps:
+      - name: Download Latest Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: distribution
+          path: dist
+
+      - name: Deploy to Netlify Staging
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: "./dist"
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1      
+
+  prod_delpoy:
+    name: Prod Deploy
+    needs: staging_delpoy
+    runs-on: macos-11
+    environment: 
+      name: production
+      url: https://catalog-mfe-dev.netlify.app
+    
+    steps:
+      - name: Download Latest Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: distribution
+          path: dist
+
+      - name: Deploy to Netlify Prod
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: "./dist"
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1      
