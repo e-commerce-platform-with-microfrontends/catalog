@@ -23,7 +23,7 @@ export default function ProductDetails() {
   return (
     <>
       <S.Link to={`/products`} id={`go-back`}>
-        <PText>← Back</PText>
+        <PText>← Back to Products</PText>
       </S.Link>
       <S.ProductDetails>
         <S.ImageContainer>

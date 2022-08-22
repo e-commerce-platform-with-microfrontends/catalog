@@ -66,7 +66,7 @@ jobs:
     runs-on: macos-11
     environment: 
       name: staging
-      url: https://catalog-mfe-dev.netlify.app
+      url: https://catalog-mfe-staging.netlify.app
     
     steps:
       - name: Download Latest Artifact
@@ -96,7 +96,7 @@ jobs:
     runs-on: macos-11
     environment: 
       name: production
-      url: https://catalog-mfe-dev.netlify.app
+      url: https://catalog-mfe.netlify.app
     
     steps:
       - name: Download Latest Artifact
