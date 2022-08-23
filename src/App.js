@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ProductDetail from './ProductDetail';
-import ProductList from './ProductList';
+import ProductList from './ProductList/ProductList';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'ui-components';
 
