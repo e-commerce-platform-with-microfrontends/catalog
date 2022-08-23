@@ -7,7 +7,8 @@
     "start": "webpack serve --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "e2e": "testcafe chrome e2es"
   },
   "author": "vishal sharma",
   "license": "ISC",

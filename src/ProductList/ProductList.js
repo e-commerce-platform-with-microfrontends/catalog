@@ -15,7 +15,7 @@ export default function ProductList() {
   return (
     <S.ProductList>
       {products.map((product) => (
-        <S.Card key={`${product.id}`}>
+        <S.Card key={`${product.id}`} className="product_card">
           <S.Link to={`/products/${product.id}?category=${product.category}`} id={`go-to-product-details-${product.id}`}>
             <S.Image src={product.image} />
           </S.Link>

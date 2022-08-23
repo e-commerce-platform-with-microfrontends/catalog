@@ -6,8 +6,8 @@ on:
       - "main"
 
 jobs:
-  build:
-    name: Build
+  test_and_build:
+    name: Test and Build
     runs-on: macos-11
 
     strategy:
@@ -35,7 +35,7 @@ jobs:
 
   dev_delpoy:
     name: Dev Deploy
-    needs: build
+    needs: test_and_build
     runs-on: macos-11
     environment: 
       name: dev
