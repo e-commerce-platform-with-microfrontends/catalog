@@ -71,7 +71,8 @@ jobs:
     steps:
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
-        run: npm run e2e
+        with:
+          args: "chrome e2es"
 
   staging_delpoy:
     name: Staging Deploy
