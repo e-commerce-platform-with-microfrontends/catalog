@@ -68,7 +68,14 @@ jobs:
     needs: dev_delpoy
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [14.x]
+
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
         with:
