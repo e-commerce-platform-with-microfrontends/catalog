@@ -63,9 +63,14 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1
 
+  mfe_e2e:
+    name: Micro Frontend E2E
+    needs: dev_delpoy
+    runs-on: macos-11
+
   staging_delpoy:
     name: Staging Deploy
-    needs: dev_delpoy
+    needs: mfe_e2e
     runs-on: macos-11
     environment: 
       name: staging
@@ -93,9 +98,14 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1      
 
+  app_e2e:
+    name: App E2E
+    needs: staging_delpoy
+    runs-on: macos-11
+
   prod_delpoy:
     name: Prod Deploy
-    needs: staging_delpoy
+    needs: app_e2e
     runs-on: macos-11
     environment: 
       name: production
