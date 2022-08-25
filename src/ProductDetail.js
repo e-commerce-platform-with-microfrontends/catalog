@@ -16,9 +16,6 @@ export default function ProductDetails() {
   }, []);
 
   const addToCart = (e) => {
-    console.log(product)
-    console.log(product.id)
-    console.log(product.price)
     const event = new CustomEvent('ADD_TO_CART', { detail: { itemId: product.id, price: product.price } });
     window.dispatchEvent(event)
   }

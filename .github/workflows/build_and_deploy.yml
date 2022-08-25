@@ -37,7 +37,7 @@ jobs:
     name: Dev Deploy
     needs: test_and_build
     runs-on: macos-11
-    environment: 
+    environment:
       name: dev
       url: https://catalog-mfe-dev.netlify.app
 
@@ -66,20 +66,21 @@ jobs:
   mfe_e2e:
     name: Micro Frontend E2E
     needs: dev_delpoy
-    runs-on: macos-11
+    runs-on: ubuntu-latest
 
     steps:
-      - name: e2es
-        uses: actions/checkout@v1
+      - name: Run TestCafe Tests
+        uses: DevExpress/testcafe-action@latest
+        run: npm run e2e
 
   staging_delpoy:
     name: Staging Deploy
     needs: mfe_e2e
     runs-on: macos-11
-    environment: 
+    environment:
       name: staging
       url: https://catalog-mfe-staging.netlify.app
-    
+
     steps:
       - name: Download Latest Artifact
         uses: actions/download-artifact@v3
@@ -100,7 +101,7 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 1      
+        timeout-minutes: 1
 
   app_e2e:
     name: App E2E
@@ -115,10 +116,10 @@ jobs:
     name: Prod Deploy
     needs: app_e2e
     runs-on: macos-11
-    environment: 
+    environment:
       name: production
       url: https://catalog-mfe.netlify.app
-    
+
     steps:
       - name: Download Latest Artifact
         uses: actions/download-artifact@v3
@@ -139,4 +140,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 1      
+        timeout-minutes: 1
