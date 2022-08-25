@@ -70,6 +70,7 @@ jobs:
 
     steps:
       - name: e2es
+        uses: actions/checkout@v1
 
   staging_delpoy:
     name: Staging Deploy
@@ -108,6 +109,7 @@ jobs:
 
     steps:
       - name: e2es
+        uses: actions/checkout@v1
 
   prod_delpoy:
     name: Prod Deploy
