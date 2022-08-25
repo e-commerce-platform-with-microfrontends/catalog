@@ -68,6 +68,9 @@ jobs:
     needs: dev_delpoy
     runs-on: macos-11
 
+    steps:
+      - name: e2es
+
   staging_delpoy:
     name: Staging Deploy
     needs: mfe_e2e
@@ -102,6 +105,9 @@ jobs:
     name: App E2E
     needs: staging_delpoy
     runs-on: macos-11
+
+    steps:
+      - name: e2es
 
   prod_delpoy:
     name: Prod Deploy
