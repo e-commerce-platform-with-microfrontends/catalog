@@ -16,6 +16,9 @@ export default function ProductDetails() {
   }, []);
 
   const addToCart = (e) => {
+    console.log(product)
+    console.log(product.id)
+    console.log(product.price)
     const event = new CustomEvent('ADD_TO_CART', { detail: { itemId: product.id, price: product.price } });
     window.dispatchEvent(event)
   }
@@ -25,32 +28,36 @@ export default function ProductDetails() {
       <S.Link to={`/products`} id={`go-back`}>
         <PText>← Back</PText>
       </S.Link>
-      <S.ProductDetails>
-        <S.ImageContainer>
-          <S.ProductImage src={product?.image} alt={product.title} className="product-image" />
-        </S.ImageContainer>
-        <S.ProductInfo>
-          <section>
-            <Heading1>{product.title}</Heading1>
-            <S.SpaceTop />
-            <Heading2>₹ {product.price}</Heading2>
-            <S.SpaceTop />
-            <PText>
-              Ratings: {product?.rating?.rate} out of 5. ({product?.rating?.count} reviews)
-            </PText>
-            <S.SpaceTop />
-            <PText>{product.description}</PText>
-          </section>
-          <Button 
-            id="add-to-cart"
-            buttonType={ButtonAction.PRIMARY}
-            size={ButtonSize.DEFAULT}
-            onClick={addToCart}>
-            Add to Cart
-          </Button>
-        </S.ProductInfo>
-      </S.ProductDetails>
+      {
+        product.id && (
+          <S.ProductDetails>
+            <S.ImageContainer>
+              <S.ProductImage src={product?.image} alt={product.title} className="product-image" />
+            </S.ImageContainer>
+            <S.ProductInfo>
+              <section>
+                <Heading1>{product.title}</Heading1>
+                <S.SpaceTop />
+                <Heading2>₹ {product.price}</Heading2>
+                <S.SpaceTop />
+                <PText>
+                  Ratings: {product?.rating?.rate} out of 5. ({product?.rating?.count} reviews)
+                </PText>
+                <S.SpaceTop />
+                <PText>{product.description}</PText>
+              </section>
+              <Button
+                id="add-to-cart"
+                buttonType={ButtonAction.PRIMARY}
+                size={ButtonSize.DEFAULT}
+                onClick={addToCart}>
+                Add to Cart
+              </Button>
+            </S.ProductInfo>
+          </S.ProductDetails>
 
+        )
+      }
       <MicroFrontend src="http://localhost:8083/review.bundle.js" />
     </>
   );
