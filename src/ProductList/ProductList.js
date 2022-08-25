@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { API_ROOT } from '../env';
+
 import { Heading3, PText } from 'ui-components';
 import * as S from './ProductList.styles';
 
@@ -7,7 +9,7 @@ export default function ProductList() {
   const [products, setProducts] = useState([]);
 
   useEffect(async () => {
-    const productList = await fetch('http://localhost:4000/products').then(res => res.json());
+    const productList = await fetch(`${API_ROOT.DEV}/products`).then(res => res.json());
 
     setProducts(productList);
   }, []);

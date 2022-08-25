@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Heading1, Heading2, Button, PText, ButtonAction, ButtonSize } from 'ui-components';
 
 import MicroFrontend from "./MicroFrontend";
-
+import { API_ROOT } from './env';
 import * as S from './ProductDetails.styles';
 
 export default function ProductDetails() {
@@ -11,7 +11,7 @@ export default function ProductDetails() {
   const [product, setProduct] = useState({});
 
   useEffect(async () => {
-    const product = await fetch(`http://localhost:4000/products/${productId}`).then(res => res.json());
+    const product = await fetch(`${API_ROOT.DEV}/products/${productId}`).then(res => res.json());
     setProduct(product);
   }, []);
 
