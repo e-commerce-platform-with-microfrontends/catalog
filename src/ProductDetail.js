@@ -55,7 +55,7 @@ export default function ProductDetails() {
 
         )
       }
-      <MicroFrontend src="http://localhost:8083/review.bundle.js" />
+      <MicroFrontend src="http://localhost:3000/reviews/reviewWithContainer.bundle.js" />
     </>
   );
 }

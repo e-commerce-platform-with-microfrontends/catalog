@@ -1,19 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
-const MicroFrontend = ({ src, elementId }) => {
+export default function MicroFrontend({ src }) {
+  const ref = useRef(null);
+
+  const renderMicrofrontend = () => {
+    window.mountReviewMfe(ref.current);
+  }
+
   useEffect(() => {
     if (window && document) {
       const script = document.createElement('script');
-      const body = document.getElementsByTagName('body')[0];
-      script.id = 'customer-reviews';
+      script.id = 'app-user';
       script.src = src;
-      body.appendChild(script);
+      script.onload = renderMicrofrontend;
+      document.head.appendChild(script);
     }
-  }, [])
+  }, []);
 
   return (
-    <div id={elementId} />
+    <div ref={ref} />
   )
 }
-
-export default MicroFrontend;

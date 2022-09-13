@@ -7,12 +7,14 @@ import { theme } from 'ui-components';
 
 export default () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Routes>
-        <Route path="/" element={<ProductList />} />
-        <Route path="products" element={<ProductList />} />
-        <Route path="products/:productId" element={<ProductDetail />} />
-      </Routes >
-    </ThemeProvider>
+    <div className='container'>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="products" element={<ProductList />} />
+          <Route path="products/:productId" element={<ProductDetail />} />
+        </Routes >
+      </ThemeProvider>
+    </div>
   )
 }

@@ -11,7 +11,8 @@ const devConfig = {
     }),
   ],
   entry: {
-    catalog: './src/index.js'
+    catalog: './src/index.js',
+    catalogWithContainer: './src/indexWithContainer.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -20,4 +21,3 @@ const devConfig = {
 };
 
 module.exports = merge(commonConfig, devConfig);
-
