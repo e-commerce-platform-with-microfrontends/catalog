@@ -14,6 +14,8 @@ export default function MicroFrontend({ src }) {
       script.src = src;
       script.onload = renderMicrofrontend;
       document.head.appendChild(script);
+    } else {
+      renderMicrofrontend();
     }
   }, []);
 
